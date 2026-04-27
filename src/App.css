@@ -1,0 +1,20 @@
+.workout-list {
+  padding: 1rem;
+}
+
+.workout {
+  background: #fff;
+  text-align: left;
+  border-left: 1rem solid black;
+  border-radius: 1rem;
+  padding: 0.5rem;
+}
+
+.workout-info {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.workout-info-divider {
+  text-align: center;;
+}
