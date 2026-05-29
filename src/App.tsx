@@ -1,29 +1,35 @@
-import React, { useEffect, useState } from 'react';
-import { getWorkout } from './userService';
-import './App.css'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import WorkoutsPage from './pages/WorkoutsPage';
+import WorkoutDetailPage from './pages/WorkoutDetailPage';
+import ProgressPage from './pages/ProgressPage';
 
-function App() {
-  const [workouts, setWorkouts] = useState<any[]>([]);
-
-  useEffect(() => {
-    const loadData = async () => {
-      const data = await getWorkout(1); // Fetching workout ID 1
-      console.log(data);
-      setWorkouts(data);
-    };
-    loadData();
-  }, []);
-
-  return (
-    <div>
-      <h1>Workouts</h1>
-      {workouts.map((workout) => (
-        <div key={workout.id}>
-          <h3>{workout.name}</h3>
-        </div>
-      ))}
-    </div>
-  );
+function ProtectedRoute({ children }: { children: JSX.Element }) {
+  const { isAuthenticated } = useAuth();
+  return isAuthenticated ? children : <Navigate to="/login" />;
 }
 
-export default App
+export default function App() {
+  return (
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/workouts" element={
+            <ProtectedRoute><WorkoutsPage /></ProtectedRoute>
+          } />
+          <Route path="/workouts/:id" element={
+            <ProtectedRoute><WorkoutDetailPage /></ProtectedRoute>
+          } />
+          <Route path="/progress" element={
+            <ProtectedRoute><ProgressPage /></ProtectedRoute>
+          } />
+          <Route path="*" element={<Navigate to="/workouts" />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
+  );
+}
