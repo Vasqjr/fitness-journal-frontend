@@ -54,9 +54,9 @@ export default function WorkoutDetailPage() {
   if (!workout) return <p>Loading...</p>;
 
   return (
-    <div style={{ maxWidth: 600, margin: '40px auto', padding: 24 }}>
+    <div>
       <button onClick={() => navigate('/workouts')}>← Back</button>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div>
         <h1>{workout.name}</h1>
         <button onClick={handleDeleteWorkout} style={{ color: 'red' }}>Delete Workout</button>
       </div>
@@ -67,7 +67,7 @@ export default function WorkoutDetailPage() {
         <p>No sets yet.</p>
       ) : (
         workout.sets.map(set => (
-          <div key={set.id} style={{ display: 'flex', justifyContent: 'space-between', padding: 8, border: '1px solid #eee', marginBottom: 4 }}>
+          <div key={set.id}>
             <span>{set.exerciseName} — {set.reps} reps @ {set.weightKg}kg</span>
             <button onClick={() => handleDeleteSet(set.id)}>✕</button>
           </div>
@@ -79,7 +79,6 @@ export default function WorkoutDetailPage() {
         <select
           value={exerciseId}
           onChange={e => setExerciseId(e.target.value)}
-          style={{ display: 'block', width: '100%', marginBottom: 8, padding: 8 }}
         >
           {exercises.map(ex => (
             <option key={ex.id} value={ex.id}>{ex.name}</option>
@@ -89,13 +88,11 @@ export default function WorkoutDetailPage() {
           placeholder="Reps"
           value={reps}
           onChange={e => setReps(e.target.value)}
-          style={{ display: 'block', width: '100%', marginBottom: 8, padding: 8 }}
         />
         <input
           placeholder="Weight (kg)"
           value={weightKg}
           onChange={e => setWeightKg(e.target.value)}
-          style={{ display: 'block', width: '100%', marginBottom: 8, padding: 8 }}
         />
         <button type="submit">Add Set</button>
       </form>

@@ -23,12 +23,11 @@ export default function ProgressPage() {
   }, [selectedId]);
 
   return (
-    <div style={{ maxWidth: 700, margin: '40px auto', padding: 24 }}>
+    <div>
       <h1>Progress</h1>
       <select
         value={selectedId}
         onChange={e => setSelectedId(e.target.value)}
-        style={{ marginBottom: 24, padding: 8 }}
       >
         {exercises.map(ex => (
           <option key={ex.id} value={ex.id}>{ex.name}</option>

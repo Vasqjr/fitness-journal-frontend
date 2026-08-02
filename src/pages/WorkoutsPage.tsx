@@ -29,32 +29,30 @@ export default function WorkoutsPage() {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <div style={{ maxWidth: 600, margin: '40px auto', padding: 24 }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+    <div>
+      <div>
         <h1>My Workouts</h1>
         <div>
-          <span style={{ marginRight: 16 }}>Hi, {user?.displayName}</span>
+          <span>Hi, {user?.displayName}</span>
           <button onClick={logout}>Logout</button>
         </div>
       </div>
 
-      <button onClick={() => setShowForm(!showForm)} style={{ marginBottom: 16 }}>
+      <button onClick={() => setShowForm(!showForm)}>
         + New Workout
       </button>
 
       {showForm && (
-        <form onSubmit={handleCreate} style={{ marginBottom: 24, padding: 16, border: '1px solid #ccc' }}>
+        <form onSubmit={handleCreate}>
           <input
             placeholder="Workout name"
             value={name}
             onChange={e => setName(e.target.value)}
-            style={{ display: 'block', width: '100%', marginBottom: 8, padding: 8 }}
           />
           <input
             type="date"
             value={date}
             onChange={e => setDate(e.target.value)}
-            style={{ display: 'block', width: '100%', marginBottom: 8, padding: 8 }}
           />
           <button type="submit">Create</button>
         </form>
@@ -67,10 +65,9 @@ export default function WorkoutsPage() {
           <div
             key={workout.id}
             onClick={() => navigate(`/workouts/${workout.id}`)}
-            style={{ padding: 16, border: '1px solid #ccc', marginBottom: 8, cursor: 'pointer', borderRadius: 4 }}
           >
-            <h3 style={{ margin: 0 }}>{workout.name}</h3>
-            <p style={{ margin: 0, color: '#666' }}>{workout.date} · {workout.sets.length} sets</p>
+            <h3 >{workout.name}</h3>
+            <p>{workout.date} · {workout.sets.length} sets</p>
           </div>
         ))
       )}

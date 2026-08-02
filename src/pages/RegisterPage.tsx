@@ -27,9 +27,8 @@ export default function RegisterPage() {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: '100px auto', padding: 24 }}>
+    <div className="register-page-wrap">
       <h1>Fitness Journal</h1>
-      <h2>Register</h2>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <input
@@ -37,25 +36,25 @@ export default function RegisterPage() {
           placeholder="Display Name"
           value={displayName}
           onChange={e => setDisplayName(e.target.value)}
-          style={{ display: 'block', width: '100%', marginBottom: 8, padding: 8 }}
+          className="register-field"
         />
         <input
           type="email"
           placeholder="Email"
           value={email}
           onChange={e => setEmail(e.target.value)}
-          style={{ display: 'block', width: '100%', marginBottom: 8, padding: 8 }}
+          className="register-field"
         />
         <input
           type="password"
           placeholder="Password"
           value={password}
           onChange={e => setPassword(e.target.value)}
-          style={{ display: 'block', width: '100%', marginBottom: 8, padding: 8 }}
+          className="register-field"
         />
-        <button type="submit" style={{ width: '100%', padding: 8 }}>Register</button>
+        <button type="submit" className='register-field register-button'>Register</button>
       </form>
-      <p>Already have an account? <Link to="/login">Login</Link></p>
+      <p className='register-info-field'>Already have an account? <Link to="/login" className='register-link'>Log in</Link></p>
     </div>
   );
 }
