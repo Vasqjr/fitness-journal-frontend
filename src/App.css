@@ -1,3 +1,11 @@
+#workout-page-wrapper {
+  text-align: right;
+}
+
+.training-log-content {
+  text-align: center;
+}
+
 .workout-list {
   padding: 1rem;
 }
@@ -11,11 +19,50 @@
 }
 
 .workout-info {
-  display: flex;
-  justify-content: space-evenly;
+  background-color: #fff;
+  width: 12rem;
+  padding: 0.125rem;
+  margin: 0.5rem auto;
+  border-left: 0.5rem solid black;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.workout-info h3 {
+  padding: 0;
 }
 
 .workout-info-divider {
   text-align: center;
+}
+
+.login-page-wrap, .register-page-wrap {
+  margin: auto;
+  width: 25rem;
+}
+
+.login-field, .register-field {
+  width: 25rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  padding-left: 0.5rem;
+  margin: 0.5rem;
+  font-size: 1.2rem;
+  border-style: none;
+}
+
+.login-button, .register-button, .logout-button{
+  color: #1f2028;
+  border-radius: 2rem;
+}
+
+.login-link, .register-link {
+  color: #ab5cff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.login-info-field, .register-info-field{
+  font-size: 1.25rem;
 }
 

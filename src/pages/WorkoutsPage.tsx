@@ -12,7 +12,6 @@ export default function WorkoutsPage() {
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
   const { logout, user } = useAuth();
   const navigate = useNavigate();
-
   useEffect(() => {
     getWorkouts().then(res => {
       setWorkouts(res.data.content);
@@ -29,48 +28,51 @@ export default function WorkoutsPage() {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <div>
-      <div>
-        <h1>My Workouts</h1>
-        <div>
-          <span>Hi, {user?.displayName}</span>
-          <button onClick={logout}>Logout</button>
+    <div id="workout-page-wrapper">
+      <button onClick={logout} className="logout-button">Logout</button>
+      <div className="training-log-content">
+        <h1>Training Log</h1>
+        <div >
+          <span>Hi, {user?.displayName}!</span>
+
         </div>
+
+
+        <button onClick={() => setShowForm(!showForm)}>
+          + New Workout
+        </button>
+
+        {showForm && (
+          <form onSubmit={handleCreate}>
+            <input
+              placeholder="Workout name"
+              value={name}
+              onChange={e => setName(e.target.value)}
+            />
+            <input
+              type="date"
+              value={date}
+              onChange={e => setDate(e.target.value)}
+            />
+            <button type="submit">Create</button>
+          </form>
+        )}
+
+        {workouts.length === 0 ? (
+          <p>No workouts yet. Create your first one!</p>
+        ) : (
+          workouts.map(workout => (
+            <div 
+              className="workout-info"
+              key={workout.id}
+              onClick={() => navigate(`/workouts/${workout.id}`)}
+            >
+              <h3>{workout.name}</h3>
+              <p>{workout.date} · {workout.sets.length} sets</p>
+            </div>
+          ))
+        )}
       </div>
-
-      <button onClick={() => setShowForm(!showForm)}>
-        + New Workout
-      </button>
-
-      {showForm && (
-        <form onSubmit={handleCreate}>
-          <input
-            placeholder="Workout name"
-            value={name}
-            onChange={e => setName(e.target.value)}
-          />
-          <input
-            type="date"
-            value={date}
-            onChange={e => setDate(e.target.value)}
-          />
-          <button type="submit">Create</button>
-        </form>
-      )}
-
-      {workouts.length === 0 ? (
-        <p>No workouts yet. Create your first one!</p>
-      ) : (
-        workouts.map(workout => (
-          <div
-            key={workout.id}
-            onClick={() => navigate(`/workouts/${workout.id}`)}
-          >
-            <h3 >{workout.name}</h3>
-            <p>{workout.date} · {workout.sets.length} sets</p>
-          </div>
-        ))
-      )}
     </div>
   );
 }
