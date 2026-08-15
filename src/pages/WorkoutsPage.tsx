@@ -32,10 +32,6 @@ export default function WorkoutsPage() {
       <button onClick={logout} className="logout-button">Logout</button>
       <div className="training-log-content">
         <h1>Training Log</h1>
-        <div >
-          <span>Hi, {user?.displayName}!</span>
-
-        </div>
 
 
         <button onClick={() => setShowForm(!showForm)}>
@@ -62,13 +58,17 @@ export default function WorkoutsPage() {
           <p>No workouts yet. Create your first one!</p>
         ) : (
           workouts.map(workout => (
-            <div 
-              className="workout-info"
-              key={workout.id}
-              onClick={() => navigate(`/workouts/${workout.id}`)}
-            >
-              <h3>{workout.name}</h3>
-              <p>{workout.date} · {workout.sets.length} sets</p>
+            <div className='workout-info-wrapper'>
+              <div className='workout-date'>{workout.date}</div>
+              <div
+                className="workout-info"
+                key={workout.id}
+                onClick={() => navigate(`/workouts/${workout.id}`)}
+              >
+                <div className='workout-name'>{workout.name}</div>
+                <div>{workout.sets.length} sets</div>
+                <div>{workout.notes}</div>
+              </div>
             </div>
           ))
         )}
