@@ -60,6 +60,15 @@
   text-align: center;
 }
 
+.workout-button {
+  justify-content: space-between;
+  gap: 0.2rem;
+  font-size: 0.85rem;
+  width: 7rem;
+  height: 2.75rem;
+  margin: 0.5rem;
+}
+
 .login-page-wrap, .register-page-wrap {
   margin: auto;
   width: 25rem;
@@ -76,8 +85,8 @@
 }
 
 .login-button, .register-button, .logout-button, .workout-button{
-  color: #101014;
-  border-radius: 1.5rem;
+  color: #13010a;
+  border-radius: 1rem;
 }
 
 .login-link, .register-link {
@@ -102,7 +111,7 @@
 }
 
 .logout-button .logout-button-icon {
-  width: 1rem;
+  width: 1.2rem;
 }
 
 .logout-button .logout-button-text {
