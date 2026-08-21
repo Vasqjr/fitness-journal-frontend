@@ -1,5 +1,6 @@
 #workout-page-wrapper {
-  text-align: right;
+  display: flex;
+  flex-direction: column;
 }
 
 .training-log-content {
@@ -47,7 +48,8 @@
 
 .workout-date {
   margin: 0.75rem;
-  font-size: 1.25rem;
+  font-size: 1rem;
+  color: #19191f;
 }
 
 .workout-info h3 {
@@ -73,9 +75,9 @@
   border-style: none;
 }
 
-.login-button, .register-button, .logout-button{
-  color: #1f2028;
-  border-radius: 2rem;
+.login-button, .register-button, .logout-button, .workout-button{
+  color: #101014;
+  border-radius: 1.5rem;
 }
 
 .login-link, .register-link {
@@ -88,3 +90,22 @@
   font-size: 1.25rem;
 }
 
+.logout-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 0.2rem;
+  font-size: 1.3rem;
+  width: 7rem;
+  height: 2.75rem;
+  margin: 0.5rem;
+}
+
+.logout-button .logout-button-icon {
+  width: 1rem;
+}
+
+.logout-button .logout-button-text {
+  display: inline-flex;
+  align-items: center;
+}

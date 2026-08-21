@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { getWorkouts, createWorkout } from '../api/workoutApi';
 import { useAuth } from '../context/AuthContext';
 import type { Workout } from '../types';
+import logoutIcon from '../assets/logout.svg';
 
 export default function WorkoutsPage() {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
@@ -29,12 +30,15 @@ export default function WorkoutsPage() {
 
   return (
     <div id="workout-page-wrapper">
-      <button onClick={logout} className="logout-button">Logout</button>
+      <button onClick={logout} className="logout-button">
+        <img src={logoutIcon} className="logout-button-icon"/>
+        <span className="logout-button-text">Log Out</span>
+      </button>
       <div className="training-log-content">
         <h1>Training Log</h1>
 
 
-        <button onClick={() => setShowForm(!showForm)}>
+        <button className="workout-button" onClick={() => setShowForm(!showForm)}>
           + New Workout
         </button>
 
