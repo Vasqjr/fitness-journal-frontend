@@ -104,17 +104,24 @@
   flex-direction: row;
   justify-content: space-between;
   gap: 0.2rem;
-  font-size: 1.3rem;
-  width: 7rem;
+  font-size: 1.25rem;
+  width: 8rem;
   height: 2.75rem;
   margin: 0.5rem;
+  background-color: #7200ec;
+  
 }
 
 .logout-button .logout-button-icon {
   width: 1.2rem;
+  filter: brightness(100)
 }
 
 .logout-button .logout-button-text {
   display: inline-flex;
   align-items: center;
+  color: white;
+  border-top: 2px solid #ab5cff;
+  border-bottom: 2px solid #ab5cff;
+  margin: 0.25rem 1rem 0.25rem 0;
 }
