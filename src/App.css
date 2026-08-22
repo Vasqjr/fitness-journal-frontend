@@ -114,7 +114,7 @@
 
 .logout-button .logout-button-icon {
   width: 1.2rem;
-  filter: brightness(100)
+  filter: brightness(100);
 }
 
 .logout-button .logout-button-text {

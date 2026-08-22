@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getWorkout, addSet, deleteSet, deleteWorkout } from '../api/workoutApi';
+import { getWorkout, addSet, deleteSet, deleteWorkout, updateSet } from '../api/workoutApi';
 import { getExercises } from '../api/exerciseApi';
 import type { Workout, Exercise } from '../types';
+import SetRow from '../components/SetRow';
+import ExerciseSelector from '../components/ExerciseSelector';
+import { useMetricPreference, toKg } from '../utils/units';
 
 export default function WorkoutDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -12,6 +15,7 @@ export default function WorkoutDetailPage() {
   const [exerciseId, setExerciseId] = useState('');
   const [reps, setReps] = useState('');
   const [weightKg, setWeightKg] = useState('');
+  const useMetric = useMetricPreference();
 
   useEffect(() => {
     if (!id) return;
@@ -26,16 +30,26 @@ export default function WorkoutDetailPage() {
     e.preventDefault();
     if (!id || !workout) return;
     const setNumber = workout.sets.length + 1;
+    const weightValue = weightKg ? parseFloat(weightKg) : undefined;
     await addSet(id, {
       exerciseId,
       setNumber,
       reps: reps ? parseInt(reps) : undefined,
-      weightKg: weightKg ? parseFloat(weightKg) : undefined,
+      weightKg: weightValue !== undefined ? toKg(weightValue, useMetric) : undefined,
     });
     const res = await getWorkout(id);
     setWorkout(res.data);
     setReps('');
     setWeightKg('');
+  };
+
+
+
+  const handleUpdateSet = async (setId: string, data: { reps?: number; weightKg?: number; rpe?: number; notes?: string }) => {
+    if (!id) return;
+    await updateSet(id, setId, data);
+    const res = await getWorkout(id);
+    setWorkout(res.data);
   };
 
   const handleDeleteSet = async (setId: string) => {
@@ -67,23 +81,23 @@ export default function WorkoutDetailPage() {
         <p>No sets yet.</p>
       ) : (
         workout.sets.map(set => (
-          <div key={set.id}>
-            <span>{set.exerciseName} — {set.reps} reps @ {set.weightKg}kg</span>
-            <button onClick={() => handleDeleteSet(set.id)}>✕</button>
-          </div>
+          <SetRow
+            key={set.id}
+            set={set}
+            workoutId={id!}
+            onDelete={() => handleDeleteSet(set.id)}
+            onUpdate={handleUpdateSet}
+          />
         ))
       )}
 
       <h2>Add Set</h2>
       <form onSubmit={handleAddSet}>
-        <select
+        <ExerciseSelector
           value={exerciseId}
-          onChange={e => setExerciseId(e.target.value)}
-        >
-          {exercises.map(ex => (
-            <option key={ex.id} value={ex.id}>{ex.name}</option>
-          ))}
-        </select>
+          onChange={setExerciseId}
+        />
+
         <input
           placeholder="Reps"
           value={reps}

@@ -1,4 +1,4 @@
-import './App.css';
+import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import LoginPage from './pages/LoginPage';
@@ -6,11 +6,19 @@ import RegisterPage from './pages/RegisterPage';
 import WorkoutsPage from './pages/WorkoutsPage';
 import WorkoutDetailPage from './pages/WorkoutDetailPage';
 import ProgressPage from './pages/ProgressPage';
-import type { JSX } from 'react';
+import ExercisesPage from './pages/ExercisesPage';
+import Navbar from './components/Navbar';
 
-function ProtectedRoute({ children }: { children: JSX.Element }) {
+function ProtectedRoute({ children }: { children: React.ReactElement }) {
   const { isAuthenticated } = useAuth();
-  return isAuthenticated ? children : <Navigate to="/login" />;
+  return isAuthenticated ? (
+    <>
+      <Navbar />
+      <div style={{ backgroundColor: '#f9fafb', minHeight: 'calc(100vh - 56px)' }}>
+        {children}
+      </div>
+    </>
+  ) : <Navigate to="/login" />;
 }
 
 export default function App() {
@@ -30,6 +38,9 @@ export default function App() {
             <ProtectedRoute><ProgressPage /></ProtectedRoute>
           } />
           <Route path="*" element={<Navigate to="/workouts" />} />
+          <Route path="/exercises" element={
+            <ProtectedRoute><ExercisesPage /></ProtectedRoute>
+          } />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
