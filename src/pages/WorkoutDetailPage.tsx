@@ -11,7 +11,6 @@ export default function WorkoutDetailPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [workout, setWorkout] = useState<Workout | null>(null);
-  const [exercises, setExercises] = useState<Exercise[]>([]);
   const [exerciseId, setExerciseId] = useState('');
   const [reps, setReps] = useState('');
   const [weightKg, setWeightKg] = useState('');

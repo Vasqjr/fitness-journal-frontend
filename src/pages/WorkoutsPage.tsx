@@ -4,7 +4,6 @@ import { getWorkouts, createWorkout, deleteWorkout } from '../api/workoutApi';
 import { useAuth } from '../context/AuthContext';
 import type { Workout } from '../types';
 import WorkoutCard from '../components/WorkoutCard';
-import logoutIcon from '../assets/logout.svg';
 
 export default function WorkoutsPage() {
   const [workouts, setWorkouts] = useState<Workout[]>([]);

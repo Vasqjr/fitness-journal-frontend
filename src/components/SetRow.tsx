@@ -4,7 +4,6 @@ import { useMetricPreference, displayWeight, toKg } from '../utils/units';
 
 interface Props {
     set: WorkoutSet;
-    workoutId: string;
     onDelete: () => void;
     onUpdate: (setId: string, data: { reps?: number; weightKg?: number; rpe?: number; notes?: string }) => void;
 }
