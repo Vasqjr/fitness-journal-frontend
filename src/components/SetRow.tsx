@@ -8,7 +8,7 @@ interface Props {
     onUpdate: (setId: string, data: { reps?: number; weightKg?: number; rpe?: number; notes?: string }) => void;
 }
 
-export default function SetRow({ set, workoutId, onDelete, onUpdate }: Props) {
+export default function SetRow({ set, onDelete, onUpdate }: Props) {
     const useMetric = useMetricPreference();
     const [editing, setEditing] = useState(false);
     const [reps, setReps] = useState(set.reps?.toString() || '');

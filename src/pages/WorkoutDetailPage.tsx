@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getWorkout, addSet, deleteSet, deleteWorkout, updateSet } from '../api/workoutApi';
-import { getExercises } from '../api/exerciseApi';
-import type { Workout, Exercise } from '../types';
+import type { Workout } from '../types';
 import SetRow from '../components/SetRow';
 import ExerciseSelector from '../components/ExerciseSelector';
 import { useMetricPreference, toKg } from '../utils/units';
@@ -19,10 +18,6 @@ export default function WorkoutDetailPage() {
   useEffect(() => {
     if (!id) return;
     getWorkout(id).then(res => setWorkout(res.data));
-    getExercises().then(res => {
-      setExercises(res.data);
-      if (res.data.length > 0) setExerciseId(res.data[0].id);
-    });
   }, [id]);
 
   const handleAddSet = async (e: React.FormEvent) => {
@@ -83,7 +78,6 @@ export default function WorkoutDetailPage() {
           <SetRow
             key={set.id}
             set={set}
-            workoutId={id!}
             onDelete={() => handleDeleteSet(set.id)}
             onUpdate={handleUpdateSet}
           />
