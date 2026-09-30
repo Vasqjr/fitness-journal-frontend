@@ -37,7 +37,7 @@ export default function App() {
           <Route path="/progress" element={
             <ProtectedRoute><ProgressPage /></ProtectedRoute>
           } />
-          <Route path="*" element={<Navigate to="/workouts" />} />
+          <Route path="*" element={<Navigate to="/login" />} />
           <Route path="/exercises" element={
             <ProtectedRoute><ExercisesPage /></ProtectedRoute>
           } />

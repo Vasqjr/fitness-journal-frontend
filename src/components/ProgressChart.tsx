@@ -3,9 +3,10 @@ import type { ProgressPoint } from '../types';
 
 interface Props {
   data: ProgressPoint[];
+  useMetric: boolean;
 }
 
-export default function ProgressChart({ data }: Props) {
+export default function ProgressChart({ data, useMetric }: Props) {
   if (data.length === 0) {
     return (
       <div style={{
@@ -34,7 +35,7 @@ export default function ProgressChart({ data }: Props) {
           type="monotone"
           dataKey="maxWeightKg"
           stroke="#6366f1"
-          name="Max Weight (kg)"
+          name={useMetric ? "Max Weight (kg)" : "Max Weight (lbs)"}
           strokeWidth={2}
           dot={{ r: 4 }}
           activeDot={{ r: 6 }}

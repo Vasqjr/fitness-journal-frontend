@@ -120,7 +120,7 @@ export default function ProgressPage() {
 
       <div style={{ backgroundColor: '#fff', borderRadius: 8, border: '1px solid #e5e7eb', padding: 16 }}>
         <h3 style={{ margin: '0 0 16px', fontSize: 14, color: '#555' }}>Max Weight Over Time</h3>
-        <ProgressChart data={data} />
+        <ProgressChart data={data} useMetric={useMetric} />
       </div>
     </div>
   );
