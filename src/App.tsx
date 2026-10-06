@@ -26,7 +26,8 @@ export default function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LoginPage />} />
+          <Route path="/" element={<Navigate to="/workouts" replace />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/workouts" element={
             <ProtectedRoute><WorkoutsPage /></ProtectedRoute>
@@ -37,10 +38,10 @@ export default function App() {
           <Route path="/progress" element={
             <ProtectedRoute><ProgressPage /></ProtectedRoute>
           } />
-          <Route path="*" element={<Navigate to="/login" />} />
           <Route path="/exercises" element={
             <ProtectedRoute><ExercisesPage /></ProtectedRoute>
           } />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
